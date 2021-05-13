@@ -81,9 +81,9 @@ public class Students extends HttpServlet {
     private void viewStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Student existingStudent = studentDao.getStudent(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("add_student.jsp");
-        request.setAttribute("student", existingStudent);
+        Student selectedStudent = studentDao.getStudent(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view_student.jsp");
+        request.setAttribute("student", selectedStudent);
         dispatcher.forward(request, response);
     }
     private void insertStudent(HttpServletRequest request, HttpServletResponse response)
