@@ -21,6 +21,8 @@
             <b>Names: </b><c:out value='${student.getFirstName()} ${student.getLastName()}'></c:out>
             <br>
             <b>gender: </b><c:out value='${student.getGender()}'></c:out>
+            <br>
+            <b>Id: </b><c:out value='${student.getId()}'></c:out>
         </div>
     </c:if>
 </div>
