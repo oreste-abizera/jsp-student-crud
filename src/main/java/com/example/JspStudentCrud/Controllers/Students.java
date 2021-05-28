@@ -77,7 +77,7 @@ public class Students extends HttpServlet {
     }
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
 //        Student existingStudent = studentDao.getStudent(id);
         Student existingStudent = studentDaoHbnt.getStudent(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("add_student.jsp");
@@ -86,7 +86,7 @@ public class Students extends HttpServlet {
     }
     private void viewStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
 //        Student selectedStudent = studentDao.getStudent(id);
         Student selectedStudent = studentDaoHbnt.getStudent(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view_student.jsp");
@@ -116,7 +116,7 @@ public class Students extends HttpServlet {
     }
     private void deleteStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
 //        Student book = new Student(Long.valueOf(id));
         studentDaoHbnt.deleteStudent(id);
 //        studentDao.deleteStudent(book);
