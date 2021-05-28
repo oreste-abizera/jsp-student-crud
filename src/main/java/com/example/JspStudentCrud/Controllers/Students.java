@@ -96,8 +96,8 @@ public class Students extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String gender = request.getParameter("gender");
         Student newStudent = new Student(firstName, lastName, gender);
-        studentDao.insertStudent(newStudent);
-//        studentDaoHbnt.saveStudent(newStudent);
+//        studentDao.insertStudent(newStudent);
+        studentDaoHbnt.saveStudent(newStudent);
         response.sendRedirect("list");
     }
     private void updateStudent(HttpServletRequest request, HttpServletResponse response)
