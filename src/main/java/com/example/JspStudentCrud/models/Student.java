@@ -1,20 +1,31 @@
 package com.example.JspStudentCrud.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "students")
+@Table(name = "students_tbl")
 public class Student {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         private Long id;
+
         @Column(name = "first_name")
         private String firstName;
         @Column(name = "last_name")
         private String lastName;
         @Column(name = "gender")
         private String gender;
+
+        @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+        @JoinTable(
+                name = "student_beds",
+                joinColumns = {@JoinColumn(name = "studet_id")},
+                inverseJoinColumns = {@JoinColumn(name = "bed_id")}
+        )
+    private Set<Bed> beds = new HashSet<Bed>();
 
         public Long getId() {
             return id;
@@ -46,6 +57,15 @@ public class Student {
 
         public void setGender(String gender) {
             this.gender = gender;
+        }
+
+
+        public Set<Bed> getBeds() {
+            return beds;
+        }
+
+        public void setBeds(Set<Bed> beds) {
+            this.beds = beds;
         }
 
         public Student() {}

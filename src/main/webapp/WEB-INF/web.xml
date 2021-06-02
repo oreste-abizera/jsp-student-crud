@@ -18,7 +18,7 @@
     </welcome-file-list>
     <context-param>
         <param-name>jdbcURL</param-name>
-        <param-value>jdbc:mysql://localhost:3306/sms_db?characterEncoding=utf8</param-value>
+        <param-value>jdbc:mysql://localhost:3306/jsp-demo?characterEncoding=utf8</param-value>
     </context-param>
     <context-param>
         <param-name>jdbcUsername</param-name>
