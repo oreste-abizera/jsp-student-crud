@@ -31,6 +31,11 @@ public class Bed {
                 this.type = type;
         }
 
+        public Bed(Integer number, BedType type) {
+                this.number = number;
+                this.type = type;
+        }
+
         public Long getId() {
                 return id;
         }

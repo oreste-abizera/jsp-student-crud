@@ -22,7 +22,7 @@ public class Student {
         @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
         @JoinTable(
                 name = "student_beds",
-                joinColumns = {@JoinColumn(name = "studet_id")},
+                joinColumns = {@JoinColumn(name = "student_id")},
                 inverseJoinColumns = {@JoinColumn(name = "bed_id")}
         )
     private Set<Bed> beds = new HashSet<Bed>();

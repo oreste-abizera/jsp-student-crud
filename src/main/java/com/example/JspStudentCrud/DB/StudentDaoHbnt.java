@@ -1,10 +1,36 @@
 package com.example.JspStudentCrud.DB;
 import java.util.List;
+
+import com.example.JspStudentCrud.models.Bed;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.example.JspStudentCrud.models.Student;
 import com.example.JspStudentCrud.utils.HibernateUtil;
 public class StudentDaoHbnt {
+
+    /**
+     * save bed
+     * @param bed
+     * @return
+     */
+    public Long saveBed(Bed bed) {
+        Transaction transaction = null;
+        try(Session session=HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            Long bedId = (Long) session.save(bed);
+            transaction.commit();
+            System.out.println("bed registered hibernate");
+            return bedId;
+        }catch (Exception e){
+            e.printStackTrace();
+
+            if(transaction != null){
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
+
     /**
      * Save Student
      *
