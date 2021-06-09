@@ -2,28 +2,28 @@ package com.example.JspStudentCrud.DB;
 import java.util.List;
 
 import com.example.JspStudentCrud.models.Bed;
+import com.example.JspStudentCrud.models.BedAssignment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.example.JspStudentCrud.models.Student;
 import com.example.JspStudentCrud.utils.HibernateUtil;
-public class StudentDaoHbnt {
 
+
+public class StudentDaoHbnt {
     /**
-     * save bed
+     * Save Student
      * @param bed
-     * @return
      */
-    public Long saveBed(Bed bed) {
+
+    public Long saveBed(Bed bed){
         Transaction transaction = null;
-        try(Session session=HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
             Long bedId = (Long) session.save(bed);
             transaction.commit();
-            System.out.println("bed registered hibernate");
             return bedId;
         }catch (Exception e){
             e.printStackTrace();
-
             if(transaction != null){
                 transaction.rollback();
             }
@@ -31,11 +31,6 @@ public class StudentDaoHbnt {
         return null;
     }
 
-    /**
-     * Save Student
-     *
-     * @param student
-     */
     public void saveStudent(Student student) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -45,13 +40,32 @@ public class StudentDaoHbnt {
             session.save(student);
             // commit transaction
             transaction.commit();
-            System.out.println(" New student adde using hibernate okey");
+            System.out.println(" New student added using hibernate okay");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
         }
+    }
+
+    public Long saveBedAssignment(BedAssignment bedAssignment) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // start a transaction
+            transaction = session.beginTransaction();
+            // save the student object
+            Long bedId = (Long) session.save(bedAssignment);
+            // commit transaction
+            transaction.commit();
+            return bedId;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return null;
     }
     /**
      * Update Student
@@ -129,15 +143,20 @@ public class StudentDaoHbnt {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public List<Student> getAllStudent() {
+    public List<Student> getAllStudents() {
         Transaction transaction = null;
         List<Student> listOfStudent = null;
+        String hbl = "Select p from Student p";
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
+
             // get an student object
-            listOfStudent = session.createQuery("from Student").getResultList();
+//            listOfStudent = session.createQuery("from Student").getResultList();
             // commit transaction
+//            listOfStudent = session.createQuery(hbl).getResultList();
+            listOfStudent = session.createQuery("from Student").list();
+            System.out.println(listOfStudent);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "students_tbl")
+@Table(name = "students")
 public class Student {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +19,16 @@ public class Student {
         @Column(name = "gender")
         private String gender;
 
-        @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-        @JoinTable(
-                name = "student_beds",
-                joinColumns = {@JoinColumn(name = "student_id")},
-                inverseJoinColumns = {@JoinColumn(name = "bed_id")}
-        )
-    private Set<Bed> beds = new HashSet<Bed>();
+//        @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//        @JoinTable(
+//                name = "student_beds",
+//                joinColumns = {@JoinColumn(name = "student_id")},
+//                inverseJoinColumns = {@JoinColumn(name = "bed_id")}
+//        )
+
+        @OneToMany (mappedBy = "student", fetch = FetchType.LAZY)
+    private Set<BedAssignment> beds = new HashSet<BedAssignment>();
+//        private Set<Bed> beds = new HashSet<Bed>();
 
         public Long getId() {
             return id;
@@ -60,15 +63,23 @@ public class Student {
         }
 
 
-        public Set<Bed> getBeds() {
-            return beds;
-        }
+//        public Set<Bed> getBeds() {
+//            return beds;
+//        }
+//
+//        public void setBeds(Set<Bed> beds) {
+//            this.beds = beds;
+//        }
 
-        public void setBeds(Set<Bed> beds) {
-            this.beds = beds;
-        }
+    public Set<BedAssignment> beds() {
+        return beds;
+    }
 
-        public Student() {}
+    public void bes(Set<BedAssignment> assignedBeds) {
+        this.beds = beds;
+    }
+
+    public Student() {}
 
         public Student(String firstName, String lastName , String gender) {
             this.firstName = firstName;

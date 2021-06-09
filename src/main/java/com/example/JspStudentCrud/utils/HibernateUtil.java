@@ -3,6 +3,7 @@ package com.example.JspStudentCrud.utils;
 import java.util.Properties;
 
 import com.example.JspStudentCrud.models.Bed;
+import com.example.JspStudentCrud.models.BedAssignment;
 import com.example.JspStudentCrud.models.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -30,11 +31,12 @@ public class HibernateUtil {
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(Student.class);
                 configuration.addAnnotatedClass(Bed.class);
+                configuration.addAnnotatedClass(BedAssignment.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
